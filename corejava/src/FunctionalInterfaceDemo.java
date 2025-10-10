@@ -1,9 +1,7 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
-import java.util.function.Predicate;
-import java.util.function.Consumer;
-import java.util.function.Supplier;
+import java.util.function.*;
 
 public class FunctionalInterfaceDemo {
     public static void main(String[] args) {
@@ -12,7 +10,8 @@ public class FunctionalInterfaceDemo {
         demo.consumerFunctionDemo();
         demo.predicateFunctionDemo();
         demo.supplierFunctionDemo();
-
+        demo.functionDemo();
+        demo.biFunctionDemo();
     }
 
     private void consumerFunctionDemo() {
@@ -72,7 +71,35 @@ public class FunctionalInterfaceDemo {
     }
 
     private void functionDemo() {
-        Supplier<Double> randomValue = Math::random;
-        System.out.println(randomValue.get());
+        // This function squares the input integer
+        Function<Integer, Integer> square = number -> number * number;
+        System.out.println("The square of 5 is " + square.apply(5));
+
+        // Function to convert a String to its length
+        Function<String, Integer> stringLength = String::length;
+        System.out.println("Length of 'Hello World': " + stringLength.apply("Hello World"));
+    }
+
+    private void biFunctionDemo() {
+        // 1. BiFunction to calculate the sum of two integers
+        BiFunction<Integer, Integer, Integer> sumBiFunction = Integer::sum;
+        int sumResult = sumBiFunction.apply(10, 20);
+        System.out.println("Sum of 10 and 20: " + sumResult); // Output: Sum of 10 and 20: 30
+
+        // 2. BiFunction to concatenate two strings
+        BiFunction<String, String, String> concatBiFunction = (s1, s2) -> s1 + " " + s2;
+        String concatResult = concatBiFunction.apply("Hello", "World");
+        System.out.println("Concatenated string: " + concatResult); // Output: Concatenated string: Hello World
+
+        // 3. BiFunction to multiply an integer by a double
+        BiFunction<Integer, Double, Double> multiplyBiFunction = (num, factor) -> num * factor;
+        double multiplyResult = multiplyBiFunction.apply(5, 2.5);
+        System.out.println("Product of 5 and 2.5: " + multiplyResult); // Output: Product of 5 and 2.5: 12.5
+
+        // 4. Chaining BiFunction with another Function using andThen()
+        BiFunction<Integer, Integer, Integer> addAndDouble = Integer::sum;
+        addAndDouble = addAndDouble.andThen(result -> result * 2); // Doubles the sum
+        int finalResult = addAndDouble.apply(7, 3);
+        System.out.println("Doubled sum of 7 and 3: " + finalResult);
     }
 }
