@@ -5,13 +5,13 @@ import java.util.function.*;
 
 public class FunctionalInterfaceDemo {
     public static void main(String[] args) {
-
         FunctionalInterfaceDemo demo = new FunctionalInterfaceDemo();
         demo.consumerFunctionDemo();
         demo.predicateFunctionDemo();
         demo.supplierFunctionDemo();
         demo.functionDemo();
         demo.biFunctionDemo();
+        demo.runnableDemo();
     }
 
     private void consumerFunctionDemo() {
@@ -101,5 +101,22 @@ public class FunctionalInterfaceDemo {
         addAndDouble = addAndDouble.andThen(result -> result * 2); // Doubles the sum
         int finalResult = addAndDouble.apply(7, 3);
         System.out.println("Doubled sum of 7 and 3: " + finalResult);
+    }
+
+    private void runnableDemo() {
+        System.out.println("Main thread is: " + Thread.currentThread().getName());
+
+        Runnable r1 = new Runnable() {
+            @Override
+            public void run() {
+                System.out.println("Runnable implemented with Anonymous Class");
+            }
+        };
+
+        Runnable r2 = () -> System.out.println("Runnable implemented with Lambda");
+
+        new Thread(r1).start();
+        new Thread(r2).start();
+        new Thread(() -> System.out.println("Inline Lambda Runnable")).start();
     }
 }
