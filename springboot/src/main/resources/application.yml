@@ -1,0 +1,38 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /demo
+
+spring:
+  application:
+    name: SpringBootApplicationDemo
+  datasource:
+    url: jdbc:h2:mem:testdb # In-memory H2 database URL
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update # Hibernate DDL generation strategy
+    show-sql: true # Show SQL statements in logs
+
+# Custom properties
+app:
+  reports:
+    - name: report 1
+      id: 1
+    - name: report 2
+      id: 2
+
+
+# Configuration for 'dev'
+#---
+#spring:
+#  config:
+#    activate:
+#      on-profile: dev
+#server:
+#  port: 9090 # Override port for development environment
+
+
+
