@@ -4,6 +4,7 @@ public abstract class Vehicle {
     // Abstract methods (what it can do)
     public abstract void accelerate();
     public abstract void brake();
+    public abstract void printVehicle();
 
     // Concrete method (common to all vehicles)
     public void startEngine() {
