@@ -43,7 +43,70 @@ public class DesignPatternDemo {
     }
 
     private void structuralDesignPatternDemo() {
+        System.out.println("--Demo Structural Design Patterns--");
+        System.out.println("----Demo Adapter Design Pattern--");
+        PrinterAdapter adapter = new PrinterAdapter();
+        adapter.print();
 
+        System.out.println("----Demo Bridge Design Pattern--");
+        Vehicle car = new Car(new Produce(), new Assemble());
+        car.manufacture();
+        Vehicle truck = new Truck(new Produce(), new Assemble());
+        truck.manufacture();
+
+        System.out.println("----Demo Composite Design Pattern--");
+        // Creating simple tasks
+        Task simpleTask1 = new SimpleTask("Complete Coding");
+        Task simpleTask2 = new SimpleTask("Write Documentation");
+        // Creating a task list
+        TaskList projectTasks = new TaskList("Project Tasks");
+        projectTasks.addTask(simpleTask1);
+        projectTasks.addTask(simpleTask2);
+        // Nested task list
+        TaskList phase1Tasks = new TaskList("Phase 1 Tasks");
+        phase1Tasks.addTask(new SimpleTask("Design"));
+        phase1Tasks.addTask(new SimpleTask("Implementation"));
+        projectTasks.addTask(phase1Tasks);
+        // Displaying tasks
+        projectTasks.display();
+
+        System.out.println("----Demo Decorator Design Pattern--");
+        // Plain Coffee
+        Coffee coffee = new PlainCoffee();
+        System.out.println("Description: " + coffee.getDescription());
+        System.out.println("Cost: $" + coffee.getCost());
+        // Coffee with Milk
+        Coffee milkCoffee = new MilkDecorator(new PlainCoffee());
+        System.out.println("\nDescription: " + milkCoffee.getDescription());
+        System.out.println("Cost: $" + milkCoffee.getCost());
+        // Coffee with Sugar and Milk
+        Coffee sugarMilkCoffee = new SugarDecorator(new MilkDecorator(new PlainCoffee()));
+        System.out.println("\nDescription: " + sugarMilkCoffee.getDescription());
+        System.out.println("Cost: $" + sugarMilkCoffee.getCost());
+
+        System.out.println("----Demo Facade Design Pattern--");
+        System.out.println("It provides a unified, easy-to-use interface while hiding internal details, " +
+                "reducing complexity for clients and promoting cleaner, more maintainable code. TBD");
+
+        System.out.println("----Demo Flyweight Design Pattern--");
+        IconFactory iconFactory = new IconFactory();
+        // Draw file icons at different positions
+        Icon fileIcon1 = iconFactory.getIcon("file");
+        fileIcon1.draw(100, 100);
+        Icon fileIcon2 = iconFactory.getIcon("file");
+        fileIcon2.draw(150, 150);
+        // Draw folder icons at different positions
+        Icon folderIcon1 = iconFactory.getIcon("folder");
+        folderIcon1.draw(200, 200);
+        Icon folderIcon2 = iconFactory.getIcon("folder");
+        folderIcon2.draw(250, 250);
+
+        System.out.println("----Demo Proxy Design Pattern--");
+        Image image = new ProxyImage("example.jpg");
+        // Image will be loaded from disk only when display() is called
+        image.display();
+        // Image will not be loaded again, as it has been cached in the Proxy
+        image.display();
     }
 
     private void behavioralDesignPatternDemo() {
