@@ -3,9 +3,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.function.*;
 
-public class FunctionalInterfaceDemo {
+public class FunctionalProgrammingDemo {
     public static void main(String[] args) {
-        FunctionalInterfaceDemo demo = new FunctionalInterfaceDemo();
+        FunctionalProgrammingDemo demo = new FunctionalProgrammingDemo();
         demo.consumerFunctionDemo();
         demo.predicateFunctionDemo();
         demo.supplierFunctionDemo();
