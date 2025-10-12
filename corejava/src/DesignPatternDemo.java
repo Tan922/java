@@ -1,4 +1,19 @@
 import model.*;
+import model.TV.*;
+import model.coffee.Coffee;
+import model.coffee.MilkDecorator;
+import model.coffee.PlainCoffee;
+import model.coffee.SugarDecorator;
+import model.computer.Computer;
+import model.computer.ComputerDirector;
+import model.computer.GamingComputerBuilder;
+import model.image.*;
+import model.printer.PrinterAdapter;
+import model.request.*;
+import model.task.SimpleTask;
+import model.task.Task;
+import model.task.TaskList;
+import model.vehicle.*;
 
 public class DesignPatternDemo {
     public static void main(String[] args) {
@@ -9,7 +24,7 @@ public class DesignPatternDemo {
     }
 
     private void creationalDesignPatternDemo() {
-        System.out.println("--Demo creational design patterns--");
+        System.out.println("\n--Demo creational design patterns--");
         System.out.println("----Demo Factory method Design Pattern--");
         VehicleFactory carFactory = new CarFactory();
         VehicleFactoryClient carFactoryClient = new VehicleFactoryClient(carFactory);
@@ -21,10 +36,10 @@ public class DesignPatternDemo {
         Vehicle truck = truckFactoryClient.getVehicle();
         truck.printVehicle();
 
-        System.out.println("----Demo Singleton Design Pattern--");
+        System.out.println("\n----Demo Singleton Design Pattern--");
         Singleton.getInstance().doSomething();
 
-        System.out.println("----Demo Prototype Design Pattern--");
+        System.out.println("\n----Demo Prototype Design Pattern--");
         // Create a concrete prototype (a red circle).
         Shape circlePrototype = new Circle("red");
         // Create a client and give it the prototype.
@@ -34,7 +49,7 @@ public class DesignPatternDemo {
         // Draw the newly created red circle.
         redCircle.draw();
 
-        System.out.println("----Demo Builder Design Pattern--");
+        System.out.println("\n----Demo Builder Design Pattern--");
         GamingComputerBuilder gamingBuilder = new GamingComputerBuilder();
         ComputerDirector director = new ComputerDirector();
         director.construct(gamingBuilder);
@@ -43,18 +58,18 @@ public class DesignPatternDemo {
     }
 
     private void structuralDesignPatternDemo() {
-        System.out.println("--Demo Structural Design Patterns--");
+        System.out.println("\n--Demo Structural Design Patterns--");
         System.out.println("----Demo Adapter Design Pattern--");
         PrinterAdapter adapter = new PrinterAdapter();
         adapter.print();
 
-        System.out.println("----Demo Bridge Design Pattern--");
+        System.out.println("\n----Demo Bridge Design Pattern--");
         Vehicle car = new Car(new Produce(), new Assemble());
         car.manufacture();
         Vehicle truck = new Truck(new Produce(), new Assemble());
         truck.manufacture();
 
-        System.out.println("----Demo Composite Design Pattern--");
+        System.out.println("\n----Demo Composite Design Pattern--");
         // Creating simple tasks
         Task simpleTask1 = new SimpleTask("Complete Coding");
         Task simpleTask2 = new SimpleTask("Write Documentation");
@@ -70,7 +85,7 @@ public class DesignPatternDemo {
         // Displaying tasks
         projectTasks.display();
 
-        System.out.println("----Demo Decorator Design Pattern--");
+        System.out.println("\n----Demo Decorator Design Pattern--");
         // Plain Coffee
         Coffee coffee = new PlainCoffee();
         System.out.println("Description: " + coffee.getDescription());
@@ -84,11 +99,11 @@ public class DesignPatternDemo {
         System.out.println("\nDescription: " + sugarMilkCoffee.getDescription());
         System.out.println("Cost: $" + sugarMilkCoffee.getCost());
 
-        System.out.println("----Demo Facade Design Pattern--");
+        System.out.println("\n----Demo Facade Design Pattern--");
         System.out.println("It provides a unified, easy-to-use interface while hiding internal details, " +
                 "reducing complexity for clients and promoting cleaner, more maintainable code. TBD");
 
-        System.out.println("----Demo Flyweight Design Pattern--");
+        System.out.println("\n----Demo Flyweight Design Pattern--");
         IconFactory iconFactory = new IconFactory();
         // Draw file icons at different positions
         Icon fileIcon1 = iconFactory.getIcon("file");
@@ -101,7 +116,7 @@ public class DesignPatternDemo {
         Icon folderIcon2 = iconFactory.getIcon("folder");
         folderIcon2.draw(250, 250);
 
-        System.out.println("----Demo Proxy Design Pattern--");
+        System.out.println("\n----Demo Proxy Design Pattern--");
         Image image = new ProxyImage("example.jpg");
         // Image will be loaded from disk only when display() is called
         image.display();
@@ -110,7 +125,49 @@ public class DesignPatternDemo {
     }
 
     private void behavioralDesignPatternDemo() {
+        System.out.println("\n--Demo Behavioral Design Patterns--");
+        System.out.println("----Demo Chain of Responsibility Design Pattern--");
+        SupportHandler level1Handler = new Level1SupportHandler();
+        SupportHandler level2Handler = new Level2SupportHandler();
+        SupportHandler level3Handler = new Level3SupportHandler();
 
+        level1Handler.setNextHandler(level2Handler);
+        level2Handler.setNextHandler(level3Handler);
+
+        Request request1 = new Request(Priority.BASIC);
+        Request request2 = new Request(Priority.INTERMEDIATE);
+        Request request3 = new Request(Priority.CRITICAL);
+
+        level1Handler.handleRequest(request1);
+        level1Handler.handleRequest(request2);
+        level1Handler.handleRequest(request3);
+
+        System.out.println("\n----Demo Command Design Pattern--");
+        // Create devices
+        TV tv = new TV();
+        Stereo stereo = new Stereo();
+
+        // Create command objects
+        Command turnOnTvCommand = new TurnOnCommand(tv::turnOn);
+        Command turnOffTvCommand = new TurnOffCommand(tv::turnOff);
+        Command adjustVolumeStereoCommand = new AdjustVolumeCommand(stereo::adjustVolume);
+        Command changeChannelTvCommand = new ChangeChannelCommand(tv::changeChannel);
+
+        // Create remote control
+        RemoteControl remote = new RemoteControl();
+
+        // Set and execute commands
+        remote.setCommand(turnOnTvCommand);
+        remote.pressButton();  // Outputs: TV is now on
+
+        remote.setCommand(adjustVolumeStereoCommand);
+        remote.pressButton();  // Outputs: Volume adjusted
+
+        remote.setCommand(changeChannelTvCommand);
+        remote.pressButton();  // Outputs: Channel changed
+
+        remote.setCommand(turnOffTvCommand);
+        remote.pressButton();  // Outputs: TV is now off
     }
 }
 

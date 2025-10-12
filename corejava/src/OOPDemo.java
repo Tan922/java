@@ -1,4 +1,9 @@
 import model.*;
+import model.animal.Animal;
+import model.animal.Dog;
+import model.computer.Computer;
+import model.vehicle.Car;
+import model.vehicle.Vehicle;
 
 public class OOPDemo {
     public static void main(String[] args) {
@@ -17,15 +22,15 @@ public class OOPDemo {
     }
 
     private void encapsulationDemo() {
-        Employee emp = new Employee();
+        Computer computer = new Computer();
 
         // Using setters
-        emp.setId(101);
-        emp.setName("Tony");
+        computer.setCPU("Gaming CPU");
+        computer.setRAM("16GB DDR4");
+        computer.setStorage("1TB SSD");
 
-        // Using getters
-        System.out.println("Employee ID: " + emp.getId());
-        System.out.println("Employee Name: " + emp.getName());
+        // display
+        computer.displayInfo();
     }
 
     private void inheritanceDemo() {

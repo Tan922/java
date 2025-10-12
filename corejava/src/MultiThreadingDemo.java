@@ -1,4 +1,4 @@
-import model.TicketSystem;
+import model.ticket.TicketSystem;
 
 public class MultiThreadingDemo {
     public static void main(String[] args) {
