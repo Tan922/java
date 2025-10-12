@@ -19,4 +19,9 @@ public class Circle implements Shape {
     public void draw() {
         System.out.println("Drawing a " + color + " circle.");
     }
+
+    @Override
+    public void accept(ShapeVisitor visitor) {
+        visitor.visit(this);
+    }
 }
