@@ -1,4 +1,4 @@
-package tony.report.demo.service;
+package tony.demo.service;
 
 import org.springframework.stereotype.Service;
 
@@ -9,7 +9,7 @@ import java.util.Map;
 @Service
 public class MathService {
 
-    private final Map<Integer, Integer> memo = new HashMap<>();
+    private final Map<Integer, Long> memo = new HashMap<>();
 
     static void main(String[] args) throws Exception {
         MathService fib = new MathService();
@@ -47,12 +47,12 @@ public class MathService {
      * Time Complexity: O(N)
      * Auxiliary Space: O(N)
      */
-    public int fibonacciTabulation(int n)
+    public long fibonacciTabulation(int n)
     {
         // Declare an array to store
         // Fibonacci numbers.
         // 1 extra to handle case, n = 0
-        int[] f = new int[n + 2];
+        long[] f = new long[n + 2];
 
         int i;
 
@@ -77,7 +77,7 @@ public class MathService {
      * Time Complexity: O(N)
      * Auxiliary Space: O(N)
      */
-    public int fibonacciMemoization(int n)
+    public long fibonacciMemoization(int n)
     {
         if (n <= 1) {
             return n;
@@ -85,7 +85,7 @@ public class MathService {
         if (memo.containsKey(n)) {
             return memo.get(n);
         }
-        int result = fibonacciMemoization(n - 1) + fibonacciMemoization(n - 2);
+        long result = fibonacciMemoization(n - 1) + fibonacciMemoization(n - 2);
         memo.put(n, result);
         return result;
     }
@@ -95,13 +95,13 @@ public class MathService {
      * Time Complexity: O(N)
      * Auxiliary Space: O(1)
      */
-    public int fibonacciLoop(int n)
+    public long fibonacciLoop(int n)
     {
         if (n <= 1) {
             return n; // Base cases: fib(0) = 0, fib(1) = 1
         }
 
-        int f0 = 0, f1 = 1, f = 1;
+        long f0 = 0, f1 = 1, f = 1;
 
         for (int i = 2; i <= n; i++) {
             // Swap
@@ -117,7 +117,7 @@ public class MathService {
      * Time Complexity: O(2**N)
      * Auxiliary Space: O(n)
      */
-    public int fibonacciRecursive(int n) {
+    public long fibonacciRecursive(int n) {
         if (n <= 1) {
             return n; // Base cases: fib(0) = 0, fib(1) = 1
         }

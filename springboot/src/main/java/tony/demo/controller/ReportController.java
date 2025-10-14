@@ -1,9 +1,8 @@
-package tony.report.demo.controller;
+package tony.demo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import tony.report.demo.service.MathService;
-import tony.report.demo.service.ReportingService;
+import tony.demo.service.ReportingService;
 
 @RestController
 @RequestMapping("/report")

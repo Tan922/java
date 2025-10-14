@@ -1,10 +1,8 @@
-package tony.report.demo.config;
+package tony.demo.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
-import tony.report.demo.model.Report;
+import tony.demo.model.Report;
 
 import java.util.List;
 

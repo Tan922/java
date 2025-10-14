@@ -1,5 +1,12 @@
 server:
   port: 9090 # Override port for development environment
 
+spring:
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: none # Hibernate DDL generation strategy
+    show-sql: true # Show SQL statements in logs
+
 
 

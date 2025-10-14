@@ -1,4 +1,4 @@
-package tony.report.demo.model;
+package tony.demo.model;
 
 public class Report {
     private Long id;
